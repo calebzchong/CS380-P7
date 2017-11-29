@@ -146,8 +146,8 @@ public class FileTransfer {
 	private static void server(String keyPath, int portNumber) {
 		Scanner kb = new Scanner(System.in);
 		try (ServerSocket serverSocket = new ServerSocket(portNumber)) {
-			System.out.println("Waiting for connection...");
 			while (true) {
+				System.out.println("Waiting for connection...");
 				Socket socket = serverSocket.accept();
 				System.out.println("Connected to client.");
 				ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
@@ -187,6 +187,7 @@ public class FileTransfer {
 					}
 					m = (Message)ois.readObject();
 				} while ( m.getType() != MessageType.DISCONNECT );
+				System.out.println("Transfer ended.\n");
 				socket.close();
 			}
 		} catch ( BindException e ){
